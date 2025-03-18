@@ -7,8 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const startButton = document.querySelector('#start-button')
     const pauseButton = document.querySelector('#pause-button')
     const resetButton = document.querySelector('#reset-button')
-    const minutes = document.querySelector('#minutes')
-    const seconds = document.querySelector('#seconds')
 
     buttons.forEach(button => {
         button.addEventListener('click', function() {
@@ -46,10 +44,11 @@ function startInterval() {
 
         temp_timer--;
         pausedTimer = temp_timer
-        minutes.textContent = Math.floor(temp_timer / 60)
 
-        if ((temp_timer % 60) > 10) seconds.textContent = temp_timer % 60
-        else seconds.textContent = String(temp_timer % 60).padStart(2, '0')
+        updateDigit("minutes-first-digit", Math.floor((temp_timer / 60) / 10))
+        updateDigit("minutes-second-digit", Math.floor(temp_timer / 60) % 10)
+        updateDigit("seconds-first-digit", Math.floor((temp_timer % 60) / 10))
+        updateDigit("seconds-second-digit", (temp_timer % 60) % 10)
     }, 1000)
 }
 
@@ -62,6 +61,28 @@ function resetInterval() {
     clearInterval(timerInterval)
     timerInterval = null
     pausedTimer = null
-    minutes.textContent = 25
-    seconds.textContent = '00'
+    updateDigit("minutes-first-digit", 2)
+    updateDigit("minutes-second-digit", 5)
+    updateDigit("seconds-first-digit", 0)
+    updateDigit("seconds-second-digit", 0)
+}
+
+function updateDigit(id, newValue) {
+    const el = document.getElementById(id)
+    const currentValue = el.textContent;
+
+    if (currentValue !== String(newValue)) {
+        const newDigit = document.createElement("span");
+        newDigit.classList.add("digit", "new");
+        newDigit.id = id
+        newDigit.textContent = String(newValue);
+
+        el.classList.add("old");
+        el.parentElement.appendChild(newDigit);
+        
+        setTimeout(() => {
+            el.remove();
+            newDigit.classList.remove("new");
+        }, 300);
+    }
 }

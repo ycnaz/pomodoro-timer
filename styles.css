@@ -36,14 +36,56 @@ body {
 }
 
 .timer {
+    position: relative;
     font-weight: 100;
-    font-size: 8rem;
+    font-size: 10rem;
     user-select: none;
+    min-width: max-content;
+    display: flex;
+    justify-content: center;
+}
+
+.span-container {
+    position: relative;
+    width: 1ch;
+    overflow: hidden;
+}
+
+.timer-digits {
+    position: absolute;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.timer span.digit {
+    position: absolute;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.timer span.old {
+    transform: translateY(100%);
+}
+
+.timer span.new {
+    transform: translateY(-100%);
+    animation: drop-in 0.3s ease forwards;
+}
+
+@keyframes drop-in {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
 }
 
 .button-container {
     display: flex;
     justify-content: space-evenly;
+    width: 100%;
+    column-gap: 1rem;
 }
 
 .buttons {
@@ -54,6 +96,9 @@ body {
     color: black;
     cursor: pointer;
     transition: scale 0.3s ease;
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
 }
 
 .buttons:hover {

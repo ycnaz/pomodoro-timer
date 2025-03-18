@@ -16,11 +16,21 @@
     <script src="scripts.js"></script>
 </head>
 <body>
-    <div>
+    <div class="container">
         <div class="timer">
-            <span id="minutes">25</span>
+            <div class="span-container">
+                <span class="timer-digits" id="minutes-first-digit">2</span>
+            </div>
+            <div class="span-container">
+                <span class="timer-digits" id="minutes-second-digit">5</span>
+            </div>
             <span>:</span>
-            <span id="seconds">00</span>
+            <div class="span-container">
+                <span class="timer-digits" id="seconds-first-digit">0</span>
+            </div>
+            <div class="span-container">
+                <span class="timer-digits" id="seconds-second-digit">0</span>
+            </div>
         </div>
         <div class="button-container">
             <button id="start-button" class="buttons green">Start</button>
