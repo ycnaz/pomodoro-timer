@@ -1,0 +1,73 @@
+:root {
+    --main-color: #ADB2D4;
+    --secondary-color: #C7D9DD;
+    --third-color: #D5E5D5;
+    --fourth-color: #EEF1DA;
+    --red-color: #D84040;
+    --green-color: #2ecc71;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 100%;
+    color-scheme: dark light;
+    overflow-x: hidden;
+    height: 100%;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+*::after, *::before {
+    box-sizing: inherit;
+}
+
+body {
+    background-color: var(--main-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+.timer {
+    font-weight: 100;
+    font-size: 8rem;
+    user-select: none;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.buttons {
+    background-color: var(--secondary-color);
+    border: none;
+    padding: 1rem 2.5rem;
+    border-radius: 5px;
+    color: black;
+    cursor: pointer;
+    transition: scale 0.3s ease;
+}
+
+.buttons:hover {
+    scale: 1.1;
+}
+
+.buttons:focus {
+    scale: 1.05;
+}
+
+.green {
+    background-color: var(--green-color);
+}
+
+.red {
+    background-color: var(--red-color);
+}
