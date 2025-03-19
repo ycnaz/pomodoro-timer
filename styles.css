@@ -33,6 +33,13 @@ body {
     font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
+    color: black;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5rem;
 }
 
 .timer {
@@ -115,4 +122,27 @@ body {
 
 .red {
     background-color: var(--red-color);
+}
+
+.pomodoro-count-container {
+    text-align: center;
+}
+
+.sound-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.sound-buttons img {
+    width: 2rem;
+    cursor: pointer;
+    transition: scale 0.3s ease;
+}
+
+.sound-buttons img:hover {
+    scale: 1.1;
+}
+
+#sound-off {
+    display: none;
 }

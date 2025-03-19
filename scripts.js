@@ -1,8 +1,17 @@
-const initial_timer = 1500 // 25 minutes in seconds
+const initial_timer = 3; // 25 minutes in seconds
 let timerInterval;
 let pausedTimer;
+let pomodoroCount = 0;
+let isBreak = false;
+let isMuted = false;
+let breakTimers = {
+    '5': 5,
+    '20': 20
+};
 
 document.addEventListener("DOMContentLoaded", () => {
+    const soundOn = document.getElementById('sound-on')
+    const soundOff = document.getElementById('sound-off')
     const buttons = document.querySelectorAll('.buttons')
     const startButton = document.querySelector('#start-button')
     const pauseButton = document.querySelector('#pause-button')
@@ -27,20 +36,25 @@ document.addEventListener("DOMContentLoaded", () => {
     resetButton.addEventListener('click', () => {
         resetInterval()
     })
+
+    soundOn.addEventListener('click', () => {
+        handleSoundButton(soundOn, soundOff)
+    })
+
+    soundOff.addEventListener('click', () => {
+        handleSoundButton(soundOff, soundOn)
+    })
 })
 
 function startInterval() {
     let temp_timer;
 
-    if (!pausedTimer) temp_timer = initial_timer
+    if (!pausedTimer && !isBreak) temp_timer = initial_timer
+    else if (!pausedTimer && isBreak) temp_timer = pomodoroCount % 4 == 0 ? breakTimers['20'] : breakTimers['5']
     else temp_timer = pausedTimer
 
     timerInterval = setInterval(() => {
-        if (temp_timer <= 0){
-            clearInterval(timerInterval)
-            timerInterval = null
-            return
-        }
+        if (temp_timer <= 0) return handleTimer()
 
         temp_timer--;
         pausedTimer = temp_timer
@@ -61,6 +75,7 @@ function resetInterval() {
     clearInterval(timerInterval)
     timerInterval = null
     pausedTimer = null
+    isBreak = false
     updateDigit("minutes-first-digit", 2)
     updateDigit("minutes-second-digit", 5)
     updateDigit("seconds-first-digit", 0)
@@ -84,5 +99,48 @@ function updateDigit(id, newValue) {
             el.remove();
             newDigit.classList.remove("new");
         }, 300);
+    }
+}
+
+function handleBreakTimers(duration) {
+    clearInterval(timerInterval)
+    timerInterval = null
+    pausedTimer = null
+
+    if (duration == 5) {
+        updateDigit("minutes-first-digit", 0)
+        updateDigit("minutes-second-digit", 5)
+        updateDigit("seconds-first-digit", 0)
+        updateDigit("seconds-second-digit", 0)
+    } else {
+        updateDigit("minutes-first-digit", 2)
+        updateDigit("minutes-second-digit", 0)
+        updateDigit("seconds-first-digit", 0)
+        updateDigit("seconds-second-digit", 0)
+    }
+}
+
+function handleTimer() {
+    const pomodoroSpan = document.querySelector('#pomodoro-count')
+    const audio = document.querySelector('#audio')
+    if (!isBreak) pomodoroCount++
+    pomodoroSpan.textContent = pomodoroCount
+    isBreak = !isBreak
+    if (!isMuted) audio.play()
+
+    if (!isBreak) return resetInterval()
+    if (pomodoroCount % 4 == 0) handleBreakTimers(20)
+    else handleBreakTimers(5)
+}
+
+function handleSoundButton(clickedButton, otherButton) {
+    if (clickedButton.id == 'sound-on') {
+        clickedButton.style.display = 'none';
+        otherButton.style.display = 'block';
+        isMuted = true
+    } else {
+        clickedButton.style.display = 'none';
+        otherButton.style.display = 'block';
+        isMuted = false
     }
 }

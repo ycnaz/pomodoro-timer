@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Boost productivity with this Pomodoro timer. Use the Pomodoro technique to stay focused, manage time effectively, and enhance study or work sessions.">
 
     <link rel="stylesheet" href="styles.css">
-    <link rel="shortcut icon" href="./assets/tomato-svgrepo-com.svg" type="image/x-icon">
+    <link rel="shortcut icon" href="./assets/tomato.svg" type="image/x-icon">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
     <title>Pomodoro Timer</title>
-
-    <script src="scripts.js"></script>
 </head>
 <body>
     <div class="container">
@@ -21,22 +20,42 @@
             <div class="span-container">
                 <span class="timer-digits" id="minutes-first-digit">2</span>
             </div>
+            
             <div class="span-container">
                 <span class="timer-digits" id="minutes-second-digit">5</span>
             </div>
+
             <span>:</span>
+
             <div class="span-container">
                 <span class="timer-digits" id="seconds-first-digit">0</span>
             </div>
+
             <div class="span-container">
                 <span class="timer-digits" id="seconds-second-digit">0</span>
             </div>
         </div>
+
+        <div class="pomodoro-count-container">
+            <span>Pomodoro Count: <span id="pomodoro-count">0</span></span>
+        </div>
+
         <div class="button-container">
             <button id="start-button" class="buttons green">Start</button>
             <button id="pause-button" class="buttons">Pause</button>
             <button id="reset-button" class="buttons red">Reset</button>
         </div>
+        
+        <div class="sound-buttons">
+            <img id="sound-on" loading="lazy" alt="Sound On Button" src="./assets/sound-on.svg">
+            <img id="sound-off" loading="lazy" alt="Sound Off Button" src="./assets/sound-off.svg">
+        </div>
     </div>
+
+    <audio id="audio" preload="auto">
+        <source src="./assets/ding-36029.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="scripts.js"></script>
 </body>
 </html>
