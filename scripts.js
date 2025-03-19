@@ -1,12 +1,13 @@
-const initial_timer = 3; // 25 minutes in seconds
+const title = document.querySelector('#title');
+const initial_timer = 1500; // 25 minutes in seconds
 let timerInterval;
 let pausedTimer;
 let pomodoroCount = 0;
 let isBreak = false;
 let isMuted = false;
 let breakTimers = {
-    '5': 5,
-    '20': 20
+    '5': 300, // 5 minutes in seconds
+    '20': 1200 // 20 minutes in seconds
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -63,6 +64,8 @@ function startInterval() {
         updateDigit("minutes-second-digit", Math.floor(temp_timer / 60) % 10)
         updateDigit("seconds-first-digit", Math.floor((temp_timer % 60) / 10))
         updateDigit("seconds-second-digit", (temp_timer % 60) % 10)
+
+        title.textContent = `${String(Math.floor(temp_timer / 60)).padStart(2, '0')}:${String(temp_timer % 60).padStart(2, '0')} - ${isBreak ? 'take a break' : 'focus!'}`
     }, 1000)
 }
 
@@ -76,10 +79,14 @@ function resetInterval() {
     timerInterval = null
     pausedTimer = null
     isBreak = false
-    updateDigit("minutes-first-digit", 2)
-    updateDigit("minutes-second-digit", 5)
-    updateDigit("seconds-first-digit", 0)
-    updateDigit("seconds-second-digit", 0)
+    setTimeout(() => {
+        updateDigit("minutes-first-digit", 2)
+        updateDigit("minutes-second-digit", 5)
+        updateDigit("seconds-first-digit", 0)
+        updateDigit("seconds-second-digit", 0)
+    }, 300)
+
+    title.textContent = 'Pomodoro Timer'
 }
 
 function updateDigit(id, newValue) {
@@ -106,6 +113,8 @@ function handleBreakTimers(duration) {
     clearInterval(timerInterval)
     timerInterval = null
     pausedTimer = null
+
+    title.textContent = 'Pomodoro Timer'
 
     if (duration == 5) {
         updateDigit("minutes-first-digit", 0)

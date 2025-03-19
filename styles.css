@@ -38,6 +38,7 @@ body {
 
 .container {
     display: flex;
+    align-items: center;
     flex-direction: column;
     row-gap: 0.5rem;
 }
@@ -108,10 +109,6 @@ body {
     flex-grow: 1;
 }
 
-.buttons:hover {
-    scale: 1.1;
-}
-
 .buttons:focus {
     scale: 1.05;
 }
@@ -126,11 +123,21 @@ body {
 
 .pomodoro-count-container {
     text-align: center;
+    user-select: none;
 }
 
 .sound-buttons {
     display: flex;
     justify-content: center;
+    user-select: none;
+    max-width: max-content;
+    border-radius: 50%;
+    padding: 0.4rem;
+    transition: background-color 0.3s ease;
+}
+
+.sound-buttons:active {
+    background-color: var(--secondary-color);
 }
 
 .sound-buttons img {
@@ -139,10 +146,32 @@ body {
     transition: scale 0.3s ease;
 }
 
-.sound-buttons img:hover {
-    scale: 1.1;
-}
-
 #sound-off {
     display: none;
+}
+
+@media (max-width: 472px) {
+    .timer {
+        font-size: calc(1rem + 30vw);
+    }
+
+    .button-container {
+        flex-direction: column;
+        align-items: center;
+        row-gap: 0.5rem;
+    }
+
+    .buttons {
+        width: 10rem;
+    }
+}
+
+@media (hover: hover) {  
+    .buttons:hover {
+        scale: 1.1;
+    }
+
+    .sound-buttons img:hover {
+        scale: 1.1;
+    }
 }
