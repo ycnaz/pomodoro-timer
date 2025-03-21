@@ -8,14 +8,22 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="shortcut icon" href="./assets/tomato.svg" type="image/x-icon">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" media="print" onload="this.onload=null;this.removeAttribute('media');">
+
 
     <link rel="preload" as="image" href="./assets/sound-on.svg">
     <link rel="preload" as="image" href="./assets/sound-off.svg">
 
     <title id="title">Pomodoro Timer</title>
+
+    <style>
+        body {
+            font-family: "Montserrat", sans-serif;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
