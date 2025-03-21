@@ -143,6 +143,7 @@ body {
 
 .sound-buttons img {
     width: 2rem;
+    height: 2rem;
     cursor: pointer;
     transition: scale 0.3s ease, background-color 0.3s ease;
 }
