@@ -111,6 +111,7 @@ body {
 
 .buttons:focus {
     scale: 1.05;
+    outline: solid 5px var(--third-color);
 }
 
 .green {
@@ -143,7 +144,16 @@ body {
 .sound-buttons img {
     width: 2rem;
     cursor: pointer;
-    transition: scale 0.3s ease;
+    transition: scale 0.3s ease, background-color 0.3s ease;
+}
+
+.sound-buttons img:focus {
+    scale: 1.05;
+    outline: none;
+}
+
+.sound-buttons:focus-within {
+    background-color: var(--secondary-color);
 }
 
 #sound-off {

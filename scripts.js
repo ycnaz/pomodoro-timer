@@ -42,9 +42,23 @@ document.addEventListener("DOMContentLoaded", () => {
         handleSoundButton(soundOn, soundOff)
     })
 
+    soundOn.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault(); 
+            handleSoundButton(soundOn, soundOff);
+        }
+    });
+
     soundOff.addEventListener('click', () => {
         handleSoundButton(soundOff, soundOn)
     })
+
+    soundOff.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            handleSoundButton(soundOff, soundOn);
+        }
+    });
 })
 
 function startInterval() {
